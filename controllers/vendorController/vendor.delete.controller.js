@@ -2,6 +2,7 @@ import { PrismaClient } from "../../prisma/generated/mongo/index.js";
 import CustomError from "../../utils/CustomError.js"; 
 
 
+
 const prisma = new PrismaClient();
 
 
@@ -33,9 +34,6 @@ const  deleteVendorAccount = async (req, res, next) => {
    
 
       next(error); 
-
-      
-    
 
     }
   };

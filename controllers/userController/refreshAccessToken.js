@@ -31,7 +31,6 @@ export const refreshAccessToken = async (req, res, next) => {
 
       where: { id : decodedToken.id }, 
 
-
     });
 
     if (!user) {
