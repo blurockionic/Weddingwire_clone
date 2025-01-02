@@ -171,3 +171,4 @@
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/vendors/refresh-access-token\",\"status\":\"500\",\"responseTime\":\"270.964\"}","timestamp":"2024-11-26T04:39:58.234Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"POST\",\"url\":\"/api/v1/vendors/login\",\"status\":\"200\",\"responseTime\":\"2759.365\"}","timestamp":"2024-11-26T04:41:01.705Z"}
 {"level":"\u001b[32minfo\u001b[39m","message":"{\"method\":\"GET\",\"url\":\"/api/v1/vendors/refresh-access-token\",\"status\":\"201\",\"responseTime\":\"1269.759\"}","timestamp":"2024-11-26T04:41:08.741Z"}
+

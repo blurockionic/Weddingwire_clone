@@ -10,7 +10,7 @@ datasource db {
 
 model Vendor {
   id                String            @id @default(auto()) @map("_id") @db.ObjectId
-  name              String
+  name              String            
   business_name     String
   business_category String
   license_number    String?  
@@ -23,7 +23,7 @@ model Vendor {
   phone_number      String 
   map_location      Json
   social_networks   Json?
-  services          Service[]         @relation("VendorServices")  // One-to-many relation
+  services          Service[]           @relation("VendorServices")  // One-to-many relation
   promotions        Promotion[]       // One-to-many relation
   team_members      TeamMember[]      // One-to-many relation
   faqs              FAQ[]             // One-to-many relation
@@ -33,18 +33,22 @@ model Vendor {
   is_verified       Boolean             @default(false)
   refresh_Token        String?  
   resetPassword_Token  String?
+  role                String        @default("vendor") @db.String
 }
 
 model Service {
   id             String           @id @default(auto()) @map("_id") @db.ObjectId
   vendorId       String           @db.ObjectId
-  vendor         Vendor           @relation("VendorServices", fields: [vendorId], references: [id])
+  vendor         Vendor           @relation("VendorServices", fields: [vendorId], references: [id],onDelete: Cascade) 
   service_name   String
   description    String
-  price          Float
+  min_price      Float?
+  max_price      Float?
   service_type   String
-  availabilities Availability[]
-  media          Media[]
+  rating         Float          @default(0.0)
+  availabilities Availability[]   
+  reviews        Review[]         
+  media          Media[]           
   created_at     DateTime          @default(now())
   updated_at     DateTime          @updatedAt
 }
@@ -104,10 +108,22 @@ model FAQ {
 
 model Review {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
+
   vendorId    String   @db.ObjectId
-  vendor      Vendor   @relation(fields: [vendorId], references: [id])
-  userId      String   // ID of the user who submitted the review
-  rating      Int      @default(0) // Rating out of 5
+  vendor      Vendor   @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+
+  serviceId   String?  @db.ObjectId  // Service ID for reviews associated with a service
+  service     Service? @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  reviewerId  String   // ID of the user who submitted the review
   comment     String?  // Optional user comment
+  type        ReviewType
+
   created_at  DateTime @default(now())
+}
+
+
+enum ReviewType {
+  VENDOR
+  SERVICE
 }
