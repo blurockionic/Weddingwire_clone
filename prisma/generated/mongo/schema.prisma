@@ -16,12 +16,15 @@ model Vendor {
   license_number      String?
   service_type        String[]     @default([]) // Ensure default value for arrays
   description         String // Detailed description of the business
-  logo_url            String?
-  location            String?
+  logo_url            Json?
+  country             String?
+  state               String?
+  latitude            String?
+  longitude           String?
+  city                String?
   email               String       @unique
   password_hash       String
   phone_number        String
-  map_location        Json
   social_networks     Json?
   services            Service[]    @relation("VendorServices") // One-to-many relation
   promotions          Promotion[] // One-to-many relation
@@ -33,25 +36,32 @@ model Vendor {
   is_verified         Boolean      @default(false)
   refresh_Token       String?
   resetPassword_Token String?
+  role                String       @default("vendor") @db.String
 }
 
 model Service {
   id             String         @id @default(auto()) @map("_id") @db.ObjectId
   vendorId       String         @db.ObjectId
-  vendor         Vendor         @relation("VendorServices", fields: [vendorId], references: [id])
+  vendor         Vendor         @relation("VendorServices", fields: [vendorId], references: [id], onDelete: Cascade)
   service_name   String
   description    String
-  price          Float
+  min_price      Float?
+  max_price      Float?
+  price          Float?
   service_type   String
+  rating         Float          @default(0.0)
   availabilities Availability[]
-  media          Media[]
+  reviews        Review[]
+  media          Media[]        @relation("ServiceToMedia")
   created_at     DateTime       @default(now())
   updated_at     DateTime       @updatedAt
+
+  @@index([service_type], map: "idx_service_type")
 }
 
 model Availability {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
-  serviceId      String   @db.ObjectId
+  serviceId      String   @unique @db.ObjectId
   service        Service  @relation(fields: [serviceId], references: [id])
   available_date DateTime
   wedding_date   DateTime
@@ -61,10 +71,10 @@ model Availability {
 
 model Media {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  serviceId   String   @db.ObjectId
-  service     Service  @relation(fields: [serviceId], references: [id])
-  image_urls  String[]
-  video_urls  String[]
+  serviceId   String   @unique
+  service     Service  @relation(fields: [serviceId], references: [id], name: "ServiceToMedia")
+  image_urls  Json
+  video_urls  Json
   uploaded_at DateTime @default(now())
 }
 
@@ -103,11 +113,21 @@ model FAQ {
 }
 
 model Review {
-  id         String   @id @default(auto()) @map("_id") @db.ObjectId
-  vendorId   String   @db.ObjectId
-  vendor     Vendor   @relation(fields: [vendorId], references: [id])
-  userId     String // ID of the user who submitted the review
-  rating     Int      @default(0) // Rating out of 5
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  vendorId String @db.ObjectId
+  vendor   Vendor @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+
+  serviceId String?  @db.ObjectId // Service ID for reviews associated with a service
+  service   Service? @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  reviewerId String // ID of the user who submitted the review
   comment    String? // Optional user comment
+  type       ReviewType
+
   created_at DateTime @default(now())
+}
+
+enum ReviewType {
+  VENDOR
+  SERVICE
 }

@@ -11,9 +11,7 @@ const jwtAuthentication = (req, res, next) => {
 
     // If no token is found, deny access
     if (!token) {
-      return res
-        .status(401)
-        .json({ message: "Access token is missing or invalid." });
+      throw new CustomError("Access token is missing or invalid", 403);
     }
 
     
@@ -33,18 +31,13 @@ const jwtAuthentication = (req, res, next) => {
   } catch (error) {
     // Handle token verification errors
     if (error.name === "TokenExpiredError") {
-      return res
-        .status(401)
-        .json({ message: "Token has expired. Please log in again." });
+      return new CustomError("Token has expired. Please log in again", 401);
     }
     if (error.name === "JsonWebTokenError") {
-      return res
-        .status(403)
-        .json({ message: "Invalid token. Please log in again." });
+      return new CustomError("Invalid token. Please log in again."), 403;
     }
 
-    // Generic error handler
-    next(new CustomError("Authentication error. Please try again later.", 500));
+    next(error);
   }
 };
 

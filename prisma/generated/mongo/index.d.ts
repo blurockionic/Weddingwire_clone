@@ -55,6 +55,23 @@ export type FAQ = $Result.DefaultSelection<Prisma.$FAQPayload>
 export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>
 
 /**
+ * Enums
+ */
+export namespace $Enums {
+  export const ReviewType: {
+  VENDOR: 'VENDOR',
+  SERVICE: 'SERVICE'
+};
+
+export type ReviewType = (typeof ReviewType)[keyof typeof ReviewType]
+
+}
+
+export type ReviewType = $Enums.ReviewType
+
+export const ReviewType: typeof $Enums.ReviewType
+
+/**
  * ##  Prisma Client ʲˢ
  * 
  * Type-safe database client for TypeScript & Node.js
@@ -1499,11 +1516,13 @@ export namespace Prisma {
 
   export type ServiceCountOutputType = {
     availabilities: number
+    reviews: number
     media: number
   }
 
   export type ServiceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     availabilities?: boolean | ServiceCountOutputTypeCountAvailabilitiesArgs
+    reviews?: boolean | ServiceCountOutputTypeCountReviewsArgs
     media?: boolean | ServiceCountOutputTypeCountMediaArgs
   }
 
@@ -1523,6 +1542,13 @@ export namespace Prisma {
    */
   export type ServiceCountOutputTypeCountAvailabilitiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AvailabilityWhereInput
+  }
+
+  /**
+   * ServiceCountOutputType without action
+   */
+  export type ServiceCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReviewWhereInput
   }
 
   /**
@@ -1554,8 +1580,11 @@ export namespace Prisma {
     business_category: string | null
     license_number: string | null
     description: string | null
-    logo_url: string | null
-    location: string | null
+    country: string | null
+    state: string | null
+    latitude: string | null
+    longitude: string | null
+    city: string | null
     email: string | null
     password_hash: string | null
     phone_number: string | null
@@ -1564,6 +1593,7 @@ export namespace Prisma {
     is_verified: boolean | null
     refresh_Token: string | null
     resetPassword_Token: string | null
+    role: string | null
   }
 
   export type VendorMaxAggregateOutputType = {
@@ -1573,8 +1603,11 @@ export namespace Prisma {
     business_category: string | null
     license_number: string | null
     description: string | null
-    logo_url: string | null
-    location: string | null
+    country: string | null
+    state: string | null
+    latitude: string | null
+    longitude: string | null
+    city: string | null
     email: string | null
     password_hash: string | null
     phone_number: string | null
@@ -1583,6 +1616,7 @@ export namespace Prisma {
     is_verified: boolean | null
     refresh_Token: string | null
     resetPassword_Token: string | null
+    role: string | null
   }
 
   export type VendorCountAggregateOutputType = {
@@ -1594,17 +1628,21 @@ export namespace Prisma {
     service_type: number
     description: number
     logo_url: number
-    location: number
+    country: number
+    state: number
+    latitude: number
+    longitude: number
+    city: number
     email: number
     password_hash: number
     phone_number: number
-    map_location: number
     social_networks: number
     created_at: number
     updated_at: number
     is_verified: number
     refresh_Token: number
     resetPassword_Token: number
+    role: number
     _all: number
   }
 
@@ -1616,8 +1654,11 @@ export namespace Prisma {
     business_category?: true
     license_number?: true
     description?: true
-    logo_url?: true
-    location?: true
+    country?: true
+    state?: true
+    latitude?: true
+    longitude?: true
+    city?: true
     email?: true
     password_hash?: true
     phone_number?: true
@@ -1626,6 +1667,7 @@ export namespace Prisma {
     is_verified?: true
     refresh_Token?: true
     resetPassword_Token?: true
+    role?: true
   }
 
   export type VendorMaxAggregateInputType = {
@@ -1635,8 +1677,11 @@ export namespace Prisma {
     business_category?: true
     license_number?: true
     description?: true
-    logo_url?: true
-    location?: true
+    country?: true
+    state?: true
+    latitude?: true
+    longitude?: true
+    city?: true
     email?: true
     password_hash?: true
     phone_number?: true
@@ -1645,6 +1690,7 @@ export namespace Prisma {
     is_verified?: true
     refresh_Token?: true
     resetPassword_Token?: true
+    role?: true
   }
 
   export type VendorCountAggregateInputType = {
@@ -1656,17 +1702,21 @@ export namespace Prisma {
     service_type?: true
     description?: true
     logo_url?: true
-    location?: true
+    country?: true
+    state?: true
+    latitude?: true
+    longitude?: true
+    city?: true
     email?: true
     password_hash?: true
     phone_number?: true
-    map_location?: true
     social_networks?: true
     created_at?: true
     updated_at?: true
     is_verified?: true
     refresh_Token?: true
     resetPassword_Token?: true
+    role?: true
     _all?: true
   }
 
@@ -1750,18 +1800,22 @@ export namespace Prisma {
     license_number: string | null
     service_type: string[]
     description: string
-    logo_url: string | null
-    location: string | null
+    logo_url: JsonValue | null
+    country: string | null
+    state: string | null
+    latitude: string | null
+    longitude: string | null
+    city: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: JsonValue
     social_networks: JsonValue | null
     created_at: Date
     updated_at: Date
     is_verified: boolean
     refresh_Token: string | null
     resetPassword_Token: string | null
+    role: string
     _count: VendorCountAggregateOutputType | null
     _min: VendorMinAggregateOutputType | null
     _max: VendorMaxAggregateOutputType | null
@@ -1790,17 +1844,21 @@ export namespace Prisma {
     service_type?: boolean
     description?: boolean
     logo_url?: boolean
-    location?: boolean
+    country?: boolean
+    state?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    city?: boolean
     email?: boolean
     password_hash?: boolean
     phone_number?: boolean
-    map_location?: boolean
     social_networks?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_verified?: boolean
     refresh_Token?: boolean
     resetPassword_Token?: boolean
+    role?: boolean
     services?: boolean | Vendor$servicesArgs<ExtArgs>
     promotions?: boolean | Vendor$promotionsArgs<ExtArgs>
     team_members?: boolean | Vendor$team_membersArgs<ExtArgs>
@@ -1819,17 +1877,21 @@ export namespace Prisma {
     service_type?: boolean
     description?: boolean
     logo_url?: boolean
-    location?: boolean
+    country?: boolean
+    state?: boolean
+    latitude?: boolean
+    longitude?: boolean
+    city?: boolean
     email?: boolean
     password_hash?: boolean
     phone_number?: boolean
-    map_location?: boolean
     social_networks?: boolean
     created_at?: boolean
     updated_at?: boolean
     is_verified?: boolean
     refresh_Token?: boolean
     resetPassword_Token?: boolean
+    role?: boolean
   }
 
   export type VendorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1858,18 +1920,22 @@ export namespace Prisma {
       license_number: string | null
       service_type: string[]
       description: string
-      logo_url: string | null
-      location: string | null
+      logo_url: Prisma.JsonValue | null
+      country: string | null
+      state: string | null
+      latitude: string | null
+      longitude: string | null
+      city: string | null
       email: string
       password_hash: string
       phone_number: string
-      map_location: Prisma.JsonValue
       social_networks: Prisma.JsonValue | null
       created_at: Date
       updated_at: Date
       is_verified: boolean
       refresh_Token: string | null
       resetPassword_Token: string | null
+      role: string
     }, ExtArgs["result"]["vendor"]>
     composites: {}
   }
@@ -2274,18 +2340,22 @@ export namespace Prisma {
     readonly license_number: FieldRef<"Vendor", 'String'>
     readonly service_type: FieldRef<"Vendor", 'String[]'>
     readonly description: FieldRef<"Vendor", 'String'>
-    readonly logo_url: FieldRef<"Vendor", 'String'>
-    readonly location: FieldRef<"Vendor", 'String'>
+    readonly logo_url: FieldRef<"Vendor", 'Json'>
+    readonly country: FieldRef<"Vendor", 'String'>
+    readonly state: FieldRef<"Vendor", 'String'>
+    readonly latitude: FieldRef<"Vendor", 'String'>
+    readonly longitude: FieldRef<"Vendor", 'String'>
+    readonly city: FieldRef<"Vendor", 'String'>
     readonly email: FieldRef<"Vendor", 'String'>
     readonly password_hash: FieldRef<"Vendor", 'String'>
     readonly phone_number: FieldRef<"Vendor", 'String'>
-    readonly map_location: FieldRef<"Vendor", 'Json'>
     readonly social_networks: FieldRef<"Vendor", 'Json'>
     readonly created_at: FieldRef<"Vendor", 'DateTime'>
     readonly updated_at: FieldRef<"Vendor", 'DateTime'>
     readonly is_verified: FieldRef<"Vendor", 'Boolean'>
     readonly refresh_Token: FieldRef<"Vendor", 'String'>
     readonly resetPassword_Token: FieldRef<"Vendor", 'String'>
+    readonly role: FieldRef<"Vendor", 'String'>
   }
     
 
@@ -2739,11 +2809,17 @@ export namespace Prisma {
   }
 
   export type ServiceAvgAggregateOutputType = {
+    min_price: number | null
+    max_price: number | null
     price: number | null
+    rating: number | null
   }
 
   export type ServiceSumAggregateOutputType = {
+    min_price: number | null
+    max_price: number | null
     price: number | null
+    rating: number | null
   }
 
   export type ServiceMinAggregateOutputType = {
@@ -2751,8 +2827,11 @@ export namespace Prisma {
     vendorId: string | null
     service_name: string | null
     description: string | null
+    min_price: number | null
+    max_price: number | null
     price: number | null
     service_type: string | null
+    rating: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -2762,8 +2841,11 @@ export namespace Prisma {
     vendorId: string | null
     service_name: string | null
     description: string | null
+    min_price: number | null
+    max_price: number | null
     price: number | null
     service_type: string | null
+    rating: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -2773,8 +2855,11 @@ export namespace Prisma {
     vendorId: number
     service_name: number
     description: number
+    min_price: number
+    max_price: number
     price: number
     service_type: number
+    rating: number
     created_at: number
     updated_at: number
     _all: number
@@ -2782,11 +2867,17 @@ export namespace Prisma {
 
 
   export type ServiceAvgAggregateInputType = {
+    min_price?: true
+    max_price?: true
     price?: true
+    rating?: true
   }
 
   export type ServiceSumAggregateInputType = {
+    min_price?: true
+    max_price?: true
     price?: true
+    rating?: true
   }
 
   export type ServiceMinAggregateInputType = {
@@ -2794,8 +2885,11 @@ export namespace Prisma {
     vendorId?: true
     service_name?: true
     description?: true
+    min_price?: true
+    max_price?: true
     price?: true
     service_type?: true
+    rating?: true
     created_at?: true
     updated_at?: true
   }
@@ -2805,8 +2899,11 @@ export namespace Prisma {
     vendorId?: true
     service_name?: true
     description?: true
+    min_price?: true
+    max_price?: true
     price?: true
     service_type?: true
+    rating?: true
     created_at?: true
     updated_at?: true
   }
@@ -2816,8 +2913,11 @@ export namespace Prisma {
     vendorId?: true
     service_name?: true
     description?: true
+    min_price?: true
+    max_price?: true
     price?: true
     service_type?: true
+    rating?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -2914,8 +3014,11 @@ export namespace Prisma {
     vendorId: string
     service_name: string
     description: string
-    price: number
+    min_price: number | null
+    max_price: number | null
+    price: number | null
     service_type: string
+    rating: number
     created_at: Date
     updated_at: Date
     _count: ServiceCountAggregateOutputType | null
@@ -2944,12 +3047,16 @@ export namespace Prisma {
     vendorId?: boolean
     service_name?: boolean
     description?: boolean
+    min_price?: boolean
+    max_price?: boolean
     price?: boolean
     service_type?: boolean
+    rating?: boolean
     created_at?: boolean
     updated_at?: boolean
     vendor?: boolean | VendorDefaultArgs<ExtArgs>
     availabilities?: boolean | Service$availabilitiesArgs<ExtArgs>
+    reviews?: boolean | Service$reviewsArgs<ExtArgs>
     media?: boolean | Service$mediaArgs<ExtArgs>
     _count?: boolean | ServiceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["service"]>
@@ -2960,8 +3067,11 @@ export namespace Prisma {
     vendorId?: boolean
     service_name?: boolean
     description?: boolean
+    min_price?: boolean
+    max_price?: boolean
     price?: boolean
     service_type?: boolean
+    rating?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
@@ -2969,6 +3079,7 @@ export namespace Prisma {
   export type ServiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     vendor?: boolean | VendorDefaultArgs<ExtArgs>
     availabilities?: boolean | Service$availabilitiesArgs<ExtArgs>
+    reviews?: boolean | Service$reviewsArgs<ExtArgs>
     media?: boolean | Service$mediaArgs<ExtArgs>
     _count?: boolean | ServiceCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -2978,6 +3089,7 @@ export namespace Prisma {
     objects: {
       vendor: Prisma.$VendorPayload<ExtArgs>
       availabilities: Prisma.$AvailabilityPayload<ExtArgs>[]
+      reviews: Prisma.$ReviewPayload<ExtArgs>[]
       media: Prisma.$MediaPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -2985,8 +3097,11 @@ export namespace Prisma {
       vendorId: string
       service_name: string
       description: string
-      price: number
+      min_price: number | null
+      max_price: number | null
+      price: number | null
       service_type: string
+      rating: number
       created_at: Date
       updated_at: Date
     }, ExtArgs["result"]["service"]>
@@ -3354,6 +3469,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     vendor<T extends VendorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VendorDefaultArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     availabilities<T extends Service$availabilitiesArgs<ExtArgs> = {}>(args?: Subset<T, Service$availabilitiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AvailabilityPayload<ExtArgs>, T, "findMany"> | Null>
+    reviews<T extends Service$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, Service$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany"> | Null>
     media<T extends Service$mediaArgs<ExtArgs> = {}>(args?: Subset<T, Service$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3388,8 +3504,11 @@ export namespace Prisma {
     readonly vendorId: FieldRef<"Service", 'String'>
     readonly service_name: FieldRef<"Service", 'String'>
     readonly description: FieldRef<"Service", 'String'>
+    readonly min_price: FieldRef<"Service", 'Float'>
+    readonly max_price: FieldRef<"Service", 'Float'>
     readonly price: FieldRef<"Service", 'Float'>
     readonly service_type: FieldRef<"Service", 'String'>
+    readonly rating: FieldRef<"Service", 'Float'>
     readonly created_at: FieldRef<"Service", 'DateTime'>
     readonly updated_at: FieldRef<"Service", 'DateTime'>
   }
@@ -3735,6 +3854,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AvailabilityScalarFieldEnum | AvailabilityScalarFieldEnum[]
+  }
+
+  /**
+   * Service.reviews
+   */
+  export type Service$reviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewInclude<ExtArgs> | null
+    where?: ReviewWhereInput
+    orderBy?: ReviewOrderByWithRelationInput | ReviewOrderByWithRelationInput[]
+    cursor?: ReviewWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
   }
 
   /**
@@ -4840,8 +4979,8 @@ export namespace Prisma {
   export type MediaGroupByOutputType = {
     id: string
     serviceId: string
-    image_urls: string[]
-    video_urls: string[]
+    image_urls: JsonValue
+    video_urls: JsonValue
     uploaded_at: Date
     _count: MediaCountAggregateOutputType | null
     _min: MediaMinAggregateOutputType | null
@@ -4892,8 +5031,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       serviceId: string
-      image_urls: string[]
-      video_urls: string[]
+      image_urls: Prisma.JsonValue
+      video_urls: Prisma.JsonValue
       uploaded_at: Date
     }, ExtArgs["result"]["media"]>
     composites: {}
@@ -5290,8 +5429,8 @@ export namespace Prisma {
   interface MediaFieldRefs {
     readonly id: FieldRef<"Media", 'String'>
     readonly serviceId: FieldRef<"Media", 'String'>
-    readonly image_urls: FieldRef<"Media", 'String[]'>
-    readonly video_urls: FieldRef<"Media", 'String[]'>
+    readonly image_urls: FieldRef<"Media", 'Json'>
+    readonly video_urls: FieldRef<"Media", 'Json'>
     readonly uploaded_at: FieldRef<"Media", 'DateTime'>
   }
     
@@ -8533,81 +8672,69 @@ export namespace Prisma {
 
   export type AggregateReview = {
     _count: ReviewCountAggregateOutputType | null
-    _avg: ReviewAvgAggregateOutputType | null
-    _sum: ReviewSumAggregateOutputType | null
     _min: ReviewMinAggregateOutputType | null
     _max: ReviewMaxAggregateOutputType | null
-  }
-
-  export type ReviewAvgAggregateOutputType = {
-    rating: number | null
-  }
-
-  export type ReviewSumAggregateOutputType = {
-    rating: number | null
   }
 
   export type ReviewMinAggregateOutputType = {
     id: string | null
     vendorId: string | null
-    userId: string | null
-    rating: number | null
+    serviceId: string | null
+    reviewerId: string | null
     comment: string | null
+    type: $Enums.ReviewType | null
     created_at: Date | null
   }
 
   export type ReviewMaxAggregateOutputType = {
     id: string | null
     vendorId: string | null
-    userId: string | null
-    rating: number | null
+    serviceId: string | null
+    reviewerId: string | null
     comment: string | null
+    type: $Enums.ReviewType | null
     created_at: Date | null
   }
 
   export type ReviewCountAggregateOutputType = {
     id: number
     vendorId: number
-    userId: number
-    rating: number
+    serviceId: number
+    reviewerId: number
     comment: number
+    type: number
     created_at: number
     _all: number
   }
 
 
-  export type ReviewAvgAggregateInputType = {
-    rating?: true
-  }
-
-  export type ReviewSumAggregateInputType = {
-    rating?: true
-  }
-
   export type ReviewMinAggregateInputType = {
     id?: true
     vendorId?: true
-    userId?: true
-    rating?: true
+    serviceId?: true
+    reviewerId?: true
     comment?: true
+    type?: true
     created_at?: true
   }
 
   export type ReviewMaxAggregateInputType = {
     id?: true
     vendorId?: true
-    userId?: true
-    rating?: true
+    serviceId?: true
+    reviewerId?: true
     comment?: true
+    type?: true
     created_at?: true
   }
 
   export type ReviewCountAggregateInputType = {
     id?: true
     vendorId?: true
-    userId?: true
-    rating?: true
+    serviceId?: true
+    reviewerId?: true
     comment?: true
+    type?: true
     created_at?: true
     _all?: true
   }
@@ -8650,18 +8777,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: ReviewAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ReviewSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: ReviewMinAggregateInputType
@@ -8692,8 +8807,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ReviewCountAggregateInputType | true
-    _avg?: ReviewAvgAggregateInputType
-    _sum?: ReviewSumAggregateInputType
     _min?: ReviewMinAggregateInputType
     _max?: ReviewMaxAggregateInputType
   }
@@ -8701,13 +8814,12 @@ export namespace Prisma {
   export type ReviewGroupByOutputType = {
     id: string
     vendorId: string
-    userId: string
-    rating: number
+    serviceId: string | null
+    reviewerId: string
     comment: string | null
+    type: $Enums.ReviewType
     created_at: Date
     _count: ReviewCountAggregateOutputType | null
-    _avg: ReviewAvgAggregateOutputType | null
-    _sum: ReviewSumAggregateOutputType | null
     _min: ReviewMinAggregateOutputType | null
     _max: ReviewMaxAggregateOutputType | null
   }
@@ -8729,38 +8841,44 @@ export namespace Prisma {
   export type ReviewSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     vendorId?: boolean
-    userId?: boolean
-    rating?: boolean
+    serviceId?: boolean
+    reviewerId?: boolean
     comment?: boolean
+    type?: boolean
     created_at?: boolean
     vendor?: boolean | VendorDefaultArgs<ExtArgs>
+    service?: boolean | Review$serviceArgs<ExtArgs>
   }, ExtArgs["result"]["review"]>
 
 
   export type ReviewSelectScalar = {
     id?: boolean
     vendorId?: boolean
-    userId?: boolean
-    rating?: boolean
+    serviceId?: boolean
+    reviewerId?: boolean
     comment?: boolean
+    type?: boolean
     created_at?: boolean
   }
 
   export type ReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     vendor?: boolean | VendorDefaultArgs<ExtArgs>
+    service?: boolean | Review$serviceArgs<ExtArgs>
   }
 
   export type $ReviewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Review"
     objects: {
       vendor: Prisma.$VendorPayload<ExtArgs>
+      service: Prisma.$ServicePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       vendorId: string
-      userId: string
-      rating: number
+      serviceId: string | null
+      reviewerId: string
       comment: string | null
+      type: $Enums.ReviewType
       created_at: Date
     }, ExtArgs["result"]["review"]>
     composites: {}
@@ -9126,6 +9244,7 @@ export namespace Prisma {
   export interface Prisma__ReviewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     vendor<T extends VendorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VendorDefaultArgs<ExtArgs>>): Prisma__VendorClient<$Result.GetResult<Prisma.$VendorPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    service<T extends Review$serviceArgs<ExtArgs> = {}>(args?: Subset<T, Review$serviceArgs<ExtArgs>>): Prisma__ServiceClient<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9157,9 +9276,10 @@ export namespace Prisma {
   interface ReviewFieldRefs {
     readonly id: FieldRef<"Review", 'String'>
     readonly vendorId: FieldRef<"Review", 'String'>
-    readonly userId: FieldRef<"Review", 'String'>
-    readonly rating: FieldRef<"Review", 'Int'>
+    readonly serviceId: FieldRef<"Review", 'String'>
+    readonly reviewerId: FieldRef<"Review", 'String'>
     readonly comment: FieldRef<"Review", 'String'>
+    readonly type: FieldRef<"Review", 'ReviewType'>
     readonly created_at: FieldRef<"Review", 'DateTime'>
   }
     
@@ -9487,6 +9607,21 @@ export namespace Prisma {
   }
 
   /**
+   * Review.service
+   */
+  export type Review$serviceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Service
+     */
+    select?: ServiceSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ServiceInclude<ExtArgs> | null
+    where?: ServiceWhereInput
+  }
+
+  /**
    * Review without action
    */
   export type ReviewDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9514,17 +9649,21 @@ export namespace Prisma {
     service_type: 'service_type',
     description: 'description',
     logo_url: 'logo_url',
-    location: 'location',
+    country: 'country',
+    state: 'state',
+    latitude: 'latitude',
+    longitude: 'longitude',
+    city: 'city',
     email: 'email',
     password_hash: 'password_hash',
     phone_number: 'phone_number',
-    map_location: 'map_location',
     social_networks: 'social_networks',
     created_at: 'created_at',
     updated_at: 'updated_at',
     is_verified: 'is_verified',
     refresh_Token: 'refresh_Token',
-    resetPassword_Token: 'resetPassword_Token'
+    resetPassword_Token: 'resetPassword_Token',
+    role: 'role'
   };
 
   export type VendorScalarFieldEnum = (typeof VendorScalarFieldEnum)[keyof typeof VendorScalarFieldEnum]
@@ -9535,8 +9674,11 @@ export namespace Prisma {
     vendorId: 'vendorId',
     service_name: 'service_name',
     description: 'description',
+    min_price: 'min_price',
+    max_price: 'max_price',
     price: 'price',
     service_type: 'service_type',
+    rating: 'rating',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -9610,9 +9752,10 @@ export namespace Prisma {
   export const ReviewScalarFieldEnum: {
     id: 'id',
     vendorId: 'vendorId',
-    userId: 'userId',
-    rating: 'rating',
+    serviceId: 'serviceId',
+    reviewerId: 'reviewerId',
     comment: 'comment',
+    type: 'type',
     created_at: 'created_at'
   };
 
@@ -9697,6 +9840,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ReviewType'
+   */
+  export type EnumReviewTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReviewType'>
+    
+
+
+  /**
+   * Reference to a field of type 'ReviewType[]'
+   */
+  export type ListEnumReviewTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReviewType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -9724,18 +9881,22 @@ export namespace Prisma {
     license_number?: StringNullableFilter<"Vendor"> | string | null
     service_type?: StringNullableListFilter<"Vendor">
     description?: StringFilter<"Vendor"> | string
-    logo_url?: StringNullableFilter<"Vendor"> | string | null
-    location?: StringNullableFilter<"Vendor"> | string | null
+    logo_url?: JsonNullableFilter<"Vendor">
+    country?: StringNullableFilter<"Vendor"> | string | null
+    state?: StringNullableFilter<"Vendor"> | string | null
+    latitude?: StringNullableFilter<"Vendor"> | string | null
+    longitude?: StringNullableFilter<"Vendor"> | string | null
+    city?: StringNullableFilter<"Vendor"> | string | null
     email?: StringFilter<"Vendor"> | string
     password_hash?: StringFilter<"Vendor"> | string
     phone_number?: StringFilter<"Vendor"> | string
-    map_location?: JsonFilter<"Vendor">
     social_networks?: JsonNullableFilter<"Vendor">
     created_at?: DateTimeFilter<"Vendor"> | Date | string
     updated_at?: DateTimeFilter<"Vendor"> | Date | string
     is_verified?: BoolFilter<"Vendor"> | boolean
     refresh_Token?: StringNullableFilter<"Vendor"> | string | null
     resetPassword_Token?: StringNullableFilter<"Vendor"> | string | null
+    role?: StringFilter<"Vendor"> | string
     services?: ServiceListRelationFilter
     promotions?: PromotionListRelationFilter
     team_members?: TeamMemberListRelationFilter
@@ -9752,17 +9913,21 @@ export namespace Prisma {
     service_type?: SortOrder
     description?: SortOrder
     logo_url?: SortOrder
-    location?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    city?: SortOrder
     email?: SortOrder
     password_hash?: SortOrder
     phone_number?: SortOrder
-    map_location?: SortOrder
     social_networks?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_verified?: SortOrder
     refresh_Token?: SortOrder
     resetPassword_Token?: SortOrder
+    role?: SortOrder
     services?: ServiceOrderByRelationAggregateInput
     promotions?: PromotionOrderByRelationAggregateInput
     team_members?: TeamMemberOrderByRelationAggregateInput
@@ -9782,17 +9947,21 @@ export namespace Prisma {
     license_number?: StringNullableFilter<"Vendor"> | string | null
     service_type?: StringNullableListFilter<"Vendor">
     description?: StringFilter<"Vendor"> | string
-    logo_url?: StringNullableFilter<"Vendor"> | string | null
-    location?: StringNullableFilter<"Vendor"> | string | null
+    logo_url?: JsonNullableFilter<"Vendor">
+    country?: StringNullableFilter<"Vendor"> | string | null
+    state?: StringNullableFilter<"Vendor"> | string | null
+    latitude?: StringNullableFilter<"Vendor"> | string | null
+    longitude?: StringNullableFilter<"Vendor"> | string | null
+    city?: StringNullableFilter<"Vendor"> | string | null
     password_hash?: StringFilter<"Vendor"> | string
     phone_number?: StringFilter<"Vendor"> | string
-    map_location?: JsonFilter<"Vendor">
     social_networks?: JsonNullableFilter<"Vendor">
     created_at?: DateTimeFilter<"Vendor"> | Date | string
     updated_at?: DateTimeFilter<"Vendor"> | Date | string
     is_verified?: BoolFilter<"Vendor"> | boolean
     refresh_Token?: StringNullableFilter<"Vendor"> | string | null
     resetPassword_Token?: StringNullableFilter<"Vendor"> | string | null
+    role?: StringFilter<"Vendor"> | string
     services?: ServiceListRelationFilter
     promotions?: PromotionListRelationFilter
     team_members?: TeamMemberListRelationFilter
@@ -9809,17 +9978,21 @@ export namespace Prisma {
     service_type?: SortOrder
     description?: SortOrder
     logo_url?: SortOrder
-    location?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    city?: SortOrder
     email?: SortOrder
     password_hash?: SortOrder
     phone_number?: SortOrder
-    map_location?: SortOrder
     social_networks?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_verified?: SortOrder
     refresh_Token?: SortOrder
     resetPassword_Token?: SortOrder
+    role?: SortOrder
     _count?: VendorCountOrderByAggregateInput
     _max?: VendorMaxOrderByAggregateInput
     _min?: VendorMinOrderByAggregateInput
@@ -9836,18 +10009,22 @@ export namespace Prisma {
     license_number?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
     service_type?: StringNullableListFilter<"Vendor">
     description?: StringWithAggregatesFilter<"Vendor"> | string
-    logo_url?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
-    location?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
+    logo_url?: JsonNullableWithAggregatesFilter<"Vendor">
+    country?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
+    state?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
+    latitude?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
+    longitude?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
+    city?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
     email?: StringWithAggregatesFilter<"Vendor"> | string
     password_hash?: StringWithAggregatesFilter<"Vendor"> | string
     phone_number?: StringWithAggregatesFilter<"Vendor"> | string
-    map_location?: JsonWithAggregatesFilter<"Vendor">
     social_networks?: JsonNullableWithAggregatesFilter<"Vendor">
     created_at?: DateTimeWithAggregatesFilter<"Vendor"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Vendor"> | Date | string
     is_verified?: BoolWithAggregatesFilter<"Vendor"> | boolean
     refresh_Token?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
     resetPassword_Token?: StringNullableWithAggregatesFilter<"Vendor"> | string | null
+    role?: StringWithAggregatesFilter<"Vendor"> | string
   }
 
   export type ServiceWhereInput = {
@@ -9858,12 +10035,16 @@ export namespace Prisma {
     vendorId?: StringFilter<"Service"> | string
     service_name?: StringFilter<"Service"> | string
     description?: StringFilter<"Service"> | string
-    price?: FloatFilter<"Service"> | number
+    min_price?: FloatNullableFilter<"Service"> | number | null
+    max_price?: FloatNullableFilter<"Service"> | number | null
+    price?: FloatNullableFilter<"Service"> | number | null
     service_type?: StringFilter<"Service"> | string
+    rating?: FloatFilter<"Service"> | number
     created_at?: DateTimeFilter<"Service"> | Date | string
     updated_at?: DateTimeFilter<"Service"> | Date | string
     vendor?: XOR<VendorRelationFilter, VendorWhereInput>
     availabilities?: AvailabilityListRelationFilter
+    reviews?: ReviewListRelationFilter
     media?: MediaListRelationFilter
   }
 
@@ -9872,12 +10053,16 @@ export namespace Prisma {
     vendorId?: SortOrder
     service_name?: SortOrder
     description?: SortOrder
+    min_price?: SortOrder
+    max_price?: SortOrder
     price?: SortOrder
     service_type?: SortOrder
+    rating?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     vendor?: VendorOrderByWithRelationInput
     availabilities?: AvailabilityOrderByRelationAggregateInput
+    reviews?: ReviewOrderByRelationAggregateInput
     media?: MediaOrderByRelationAggregateInput
   }
 
@@ -9889,12 +10074,16 @@ export namespace Prisma {
     vendorId?: StringFilter<"Service"> | string
     service_name?: StringFilter<"Service"> | string
     description?: StringFilter<"Service"> | string
-    price?: FloatFilter<"Service"> | number
+    min_price?: FloatNullableFilter<"Service"> | number | null
+    max_price?: FloatNullableFilter<"Service"> | number | null
+    price?: FloatNullableFilter<"Service"> | number | null
     service_type?: StringFilter<"Service"> | string
+    rating?: FloatFilter<"Service"> | number
     created_at?: DateTimeFilter<"Service"> | Date | string
     updated_at?: DateTimeFilter<"Service"> | Date | string
     vendor?: XOR<VendorRelationFilter, VendorWhereInput>
     availabilities?: AvailabilityListRelationFilter
+    reviews?: ReviewListRelationFilter
     media?: MediaListRelationFilter
   }, "id">
 
@@ -9903,8 +10092,11 @@ export namespace Prisma {
     vendorId?: SortOrder
     service_name?: SortOrder
     description?: SortOrder
+    min_price?: SortOrder
+    max_price?: SortOrder
     price?: SortOrder
     service_type?: SortOrder
+    rating?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     _count?: ServiceCountOrderByAggregateInput
@@ -9922,8 +10114,11 @@ export namespace Prisma {
     vendorId?: StringWithAggregatesFilter<"Service"> | string
     service_name?: StringWithAggregatesFilter<"Service"> | string
     description?: StringWithAggregatesFilter<"Service"> | string
-    price?: FloatWithAggregatesFilter<"Service"> | number
+    min_price?: FloatNullableWithAggregatesFilter<"Service"> | number | null
+    max_price?: FloatNullableWithAggregatesFilter<"Service"> | number | null
+    price?: FloatNullableWithAggregatesFilter<"Service"> | number | null
     service_type?: StringWithAggregatesFilter<"Service"> | string
+    rating?: FloatWithAggregatesFilter<"Service"> | number
     created_at?: DateTimeWithAggregatesFilter<"Service"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"Service"> | Date | string
   }
@@ -9953,16 +10148,16 @@ export namespace Prisma {
 
   export type AvailabilityWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    serviceId?: string
     AND?: AvailabilityWhereInput | AvailabilityWhereInput[]
     OR?: AvailabilityWhereInput[]
     NOT?: AvailabilityWhereInput | AvailabilityWhereInput[]
-    serviceId?: StringFilter<"Availability"> | string
     available_date?: DateTimeFilter<"Availability"> | Date | string
     wedding_date?: DateTimeFilter<"Availability"> | Date | string
     is_available?: BoolFilter<"Availability"> | boolean
     created_at?: DateTimeFilter<"Availability"> | Date | string
     service?: XOR<ServiceRelationFilter, ServiceWhereInput>
-  }, "id">
+  }, "id" | "serviceId">
 
   export type AvailabilityOrderByWithAggregationInput = {
     id?: SortOrder
@@ -9994,8 +10189,8 @@ export namespace Prisma {
     NOT?: MediaWhereInput | MediaWhereInput[]
     id?: StringFilter<"Media"> | string
     serviceId?: StringFilter<"Media"> | string
-    image_urls?: StringNullableListFilter<"Media">
-    video_urls?: StringNullableListFilter<"Media">
+    image_urls?: JsonFilter<"Media">
+    video_urls?: JsonFilter<"Media">
     uploaded_at?: DateTimeFilter<"Media"> | Date | string
     service?: XOR<ServiceRelationFilter, ServiceWhereInput>
   }
@@ -10011,15 +10206,15 @@ export namespace Prisma {
 
   export type MediaWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    serviceId?: string
     AND?: MediaWhereInput | MediaWhereInput[]
     OR?: MediaWhereInput[]
     NOT?: MediaWhereInput | MediaWhereInput[]
-    serviceId?: StringFilter<"Media"> | string
-    image_urls?: StringNullableListFilter<"Media">
-    video_urls?: StringNullableListFilter<"Media">
+    image_urls?: JsonFilter<"Media">
+    video_urls?: JsonFilter<"Media">
     uploaded_at?: DateTimeFilter<"Media"> | Date | string
     service?: XOR<ServiceRelationFilter, ServiceWhereInput>
-  }, "id">
+  }, "id" | "serviceId">
 
   export type MediaOrderByWithAggregationInput = {
     id?: SortOrder
@@ -10038,8 +10233,8 @@ export namespace Prisma {
     NOT?: MediaScalarWhereWithAggregatesInput | MediaScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Media"> | string
     serviceId?: StringWithAggregatesFilter<"Media"> | string
-    image_urls?: StringNullableListFilter<"Media">
-    video_urls?: StringNullableListFilter<"Media">
+    image_urls?: JsonWithAggregatesFilter<"Media">
+    video_urls?: JsonWithAggregatesFilter<"Media">
     uploaded_at?: DateTimeWithAggregatesFilter<"Media"> | Date | string
   }
 
@@ -10251,21 +10446,25 @@ export namespace Prisma {
     NOT?: ReviewWhereInput | ReviewWhereInput[]
     id?: StringFilter<"Review"> | string
     vendorId?: StringFilter<"Review"> | string
-    userId?: StringFilter<"Review"> | string
-    rating?: IntFilter<"Review"> | number
+    serviceId?: StringNullableFilter<"Review"> | string | null
+    reviewerId?: StringFilter<"Review"> | string
     comment?: StringNullableFilter<"Review"> | string | null
+    type?: EnumReviewTypeFilter<"Review"> | $Enums.ReviewType
     created_at?: DateTimeFilter<"Review"> | Date | string
     vendor?: XOR<VendorRelationFilter, VendorWhereInput>
+    service?: XOR<ServiceNullableRelationFilter, ServiceWhereInput> | null
   }
 
   export type ReviewOrderByWithRelationInput = {
     id?: SortOrder
     vendorId?: SortOrder
-    userId?: SortOrder
-    rating?: SortOrder
+    serviceId?: SortOrder
+    reviewerId?: SortOrder
     comment?: SortOrder
+    type?: SortOrder
     created_at?: SortOrder
     vendor?: VendorOrderByWithRelationInput
+    service?: ServiceOrderByWithRelationInput
   }
 
   export type ReviewWhereUniqueInput = Prisma.AtLeast<{
@@ -10274,25 +10473,26 @@ export namespace Prisma {
     OR?: ReviewWhereInput[]
     NOT?: ReviewWhereInput | ReviewWhereInput[]
     vendorId?: StringFilter<"Review"> | string
-    userId?: StringFilter<"Review"> | string
-    rating?: IntFilter<"Review"> | number
+    serviceId?: StringNullableFilter<"Review"> | string | null
+    reviewerId?: StringFilter<"Review"> | string
     comment?: StringNullableFilter<"Review"> | string | null
+    type?: EnumReviewTypeFilter<"Review"> | $Enums.ReviewType
     created_at?: DateTimeFilter<"Review"> | Date | string
     vendor?: XOR<VendorRelationFilter, VendorWhereInput>
+    service?: XOR<ServiceNullableRelationFilter, ServiceWhereInput> | null
   }, "id">
 
   export type ReviewOrderByWithAggregationInput = {
     id?: SortOrder
     vendorId?: SortOrder
-    userId?: SortOrder
-    rating?: SortOrder
+    serviceId?: SortOrder
+    reviewerId?: SortOrder
     comment?: SortOrder
+    type?: SortOrder
     created_at?: SortOrder
     _count?: ReviewCountOrderByAggregateInput
-    _avg?: ReviewAvgOrderByAggregateInput
     _max?: ReviewMaxOrderByAggregateInput
     _min?: ReviewMinOrderByAggregateInput
-    _sum?: ReviewSumOrderByAggregateInput
   }
 
   export type ReviewScalarWhereWithAggregatesInput = {
@@ -10301,9 +10501,10 @@ export namespace Prisma {
     NOT?: ReviewScalarWhereWithAggregatesInput | ReviewScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Review"> | string
     vendorId?: StringWithAggregatesFilter<"Review"> | string
-    userId?: StringWithAggregatesFilter<"Review"> | string
-    rating?: IntWithAggregatesFilter<"Review"> | number
+    serviceId?: StringNullableWithAggregatesFilter<"Review"> | string | null
+    reviewerId?: StringWithAggregatesFilter<"Review"> | string
     comment?: StringNullableWithAggregatesFilter<"Review"> | string | null
+    type?: EnumReviewTypeWithAggregatesFilter<"Review"> | $Enums.ReviewType
     created_at?: DateTimeWithAggregatesFilter<"Review"> | Date | string
   }
 
@@ -10315,18 +10516,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
     services?: ServiceCreateNestedManyWithoutVendorInput
     promotions?: PromotionCreateNestedManyWithoutVendorInput
     team_members?: TeamMemberCreateNestedManyWithoutVendorInput
@@ -10342,18 +10547,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
     services?: ServiceUncheckedCreateNestedManyWithoutVendorInput
     promotions?: PromotionUncheckedCreateNestedManyWithoutVendorInput
     team_members?: TeamMemberUncheckedCreateNestedManyWithoutVendorInput
@@ -10368,18 +10577,22 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     services?: ServiceUpdateManyWithoutVendorNestedInput
     promotions?: PromotionUpdateManyWithoutVendorNestedInput
     team_members?: TeamMemberUpdateManyWithoutVendorNestedInput
@@ -10394,18 +10607,22 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     services?: ServiceUncheckedUpdateManyWithoutVendorNestedInput
     promotions?: PromotionUncheckedUpdateManyWithoutVendorNestedInput
     team_members?: TeamMemberUncheckedUpdateManyWithoutVendorNestedInput
@@ -10421,18 +10638,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
   }
 
   export type VendorUpdateManyMutationInput = {
@@ -10442,18 +10663,22 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type VendorUncheckedUpdateManyInput = {
@@ -10463,30 +10688,38 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type ServiceCreateInput = {
     id?: string
     service_name: string
     description: string
-    price: number
+    min_price?: number | null
+    max_price?: number | null
+    price?: number | null
     service_type: string
+    rating?: number
     created_at?: Date | string
     updated_at?: Date | string
     vendor: VendorCreateNestedOneWithoutServicesInput
     availabilities?: AvailabilityCreateNestedManyWithoutServiceInput
+    reviews?: ReviewCreateNestedManyWithoutServiceInput
     media?: MediaCreateNestedManyWithoutServiceInput
   }
 
@@ -10495,23 +10728,31 @@ export namespace Prisma {
     vendorId: string
     service_name: string
     description: string
-    price: number
+    min_price?: number | null
+    max_price?: number | null
+    price?: number | null
     service_type: string
+    rating?: number
     created_at?: Date | string
     updated_at?: Date | string
     availabilities?: AvailabilityUncheckedCreateNestedManyWithoutServiceInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutServiceInput
     media?: MediaUncheckedCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceUpdateInput = {
     service_name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     vendor?: VendorUpdateOneRequiredWithoutServicesNestedInput
     availabilities?: AvailabilityUpdateManyWithoutServiceNestedInput
+    reviews?: ReviewUpdateManyWithoutServiceNestedInput
     media?: MediaUpdateManyWithoutServiceNestedInput
   }
 
@@ -10519,11 +10760,15 @@ export namespace Prisma {
     vendorId?: StringFieldUpdateOperationsInput | string
     service_name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     availabilities?: AvailabilityUncheckedUpdateManyWithoutServiceNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutServiceNestedInput
     media?: MediaUncheckedUpdateManyWithoutServiceNestedInput
   }
 
@@ -10532,8 +10777,11 @@ export namespace Prisma {
     vendorId: string
     service_name: string
     description: string
-    price: number
+    min_price?: number | null
+    max_price?: number | null
+    price?: number | null
     service_type: string
+    rating?: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -10541,8 +10789,11 @@ export namespace Prisma {
   export type ServiceUpdateManyMutationInput = {
     service_name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10551,8 +10802,11 @@ export namespace Prisma {
     vendorId?: StringFieldUpdateOperationsInput | string
     service_name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -10617,8 +10871,8 @@ export namespace Prisma {
 
   export type MediaCreateInput = {
     id?: string
-    image_urls?: MediaCreateimage_urlsInput | string[]
-    video_urls?: MediaCreatevideo_urlsInput | string[]
+    image_urls: InputJsonValue
+    video_urls: InputJsonValue
     uploaded_at?: Date | string
     service: ServiceCreateNestedOneWithoutMediaInput
   }
@@ -10626,43 +10880,43 @@ export namespace Prisma {
   export type MediaUncheckedCreateInput = {
     id?: string
     serviceId: string
-    image_urls?: MediaCreateimage_urlsInput | string[]
-    video_urls?: MediaCreatevideo_urlsInput | string[]
+    image_urls: InputJsonValue
+    video_urls: InputJsonValue
     uploaded_at?: Date | string
   }
 
   export type MediaUpdateInput = {
-    image_urls?: MediaUpdateimage_urlsInput | string[]
-    video_urls?: MediaUpdatevideo_urlsInput | string[]
+    image_urls?: InputJsonValue | InputJsonValue
+    video_urls?: InputJsonValue | InputJsonValue
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
     service?: ServiceUpdateOneRequiredWithoutMediaNestedInput
   }
 
   export type MediaUncheckedUpdateInput = {
     serviceId?: StringFieldUpdateOperationsInput | string
-    image_urls?: MediaUpdateimage_urlsInput | string[]
-    video_urls?: MediaUpdatevideo_urlsInput | string[]
+    image_urls?: InputJsonValue | InputJsonValue
+    video_urls?: InputJsonValue | InputJsonValue
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MediaCreateManyInput = {
     id?: string
     serviceId: string
-    image_urls?: MediaCreateimage_urlsInput | string[]
-    video_urls?: MediaCreatevideo_urlsInput | string[]
+    image_urls: InputJsonValue
+    video_urls: InputJsonValue
     uploaded_at?: Date | string
   }
 
   export type MediaUpdateManyMutationInput = {
-    image_urls?: MediaUpdateimage_urlsInput | string[]
-    video_urls?: MediaUpdatevideo_urlsInput | string[]
+    image_urls?: InputJsonValue | InputJsonValue
+    video_urls?: InputJsonValue | InputJsonValue
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MediaUncheckedUpdateManyInput = {
     serviceId?: StringFieldUpdateOperationsInput | string
-    image_urls?: MediaUpdateimage_urlsInput | string[]
-    video_urls?: MediaUpdatevideo_urlsInput | string[]
+    image_urls?: InputJsonValue | InputJsonValue
+    video_urls?: InputJsonValue | InputJsonValue
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10870,59 +11124,65 @@ export namespace Prisma {
 
   export type ReviewCreateInput = {
     id?: string
-    userId: string
-    rating?: number
+    reviewerId: string
     comment?: string | null
+    type: $Enums.ReviewType
     created_at?: Date | string
     vendor: VendorCreateNestedOneWithoutReviewsInput
+    service?: ServiceCreateNestedOneWithoutReviewsInput
   }
 
   export type ReviewUncheckedCreateInput = {
     id?: string
     vendorId: string
-    userId: string
-    rating?: number
+    serviceId?: string | null
+    reviewerId: string
     comment?: string | null
+    type: $Enums.ReviewType
     created_at?: Date | string
   }
 
   export type ReviewUpdateInput = {
-    userId?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
+    reviewerId?: StringFieldUpdateOperationsInput | string
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     vendor?: VendorUpdateOneRequiredWithoutReviewsNestedInput
+    service?: ServiceUpdateOneWithoutReviewsNestedInput
   }
 
   export type ReviewUncheckedUpdateInput = {
     vendorId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
+    serviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: StringFieldUpdateOperationsInput | string
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReviewCreateManyInput = {
     id?: string
     vendorId: string
-    userId: string
-    rating?: number
+    serviceId?: string | null
+    reviewerId: string
     comment?: string | null
+    type: $Enums.ReviewType
     created_at?: Date | string
   }
 
   export type ReviewUpdateManyMutationInput = {
-    userId?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
+    reviewerId?: StringFieldUpdateOperationsInput | string
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReviewUncheckedUpdateManyInput = {
     vendorId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
+    serviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: StringFieldUpdateOperationsInput | string
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -10963,17 +11223,6 @@ export namespace Prisma {
     hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
     hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
     isEmpty?: boolean
-  }
-  export type JsonFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
   }
   export type JsonNullableFilter<$PrismaModel = never> = 
     | PatchUndefined<
@@ -11063,17 +11312,21 @@ export namespace Prisma {
     service_type?: SortOrder
     description?: SortOrder
     logo_url?: SortOrder
-    location?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    city?: SortOrder
     email?: SortOrder
     password_hash?: SortOrder
     phone_number?: SortOrder
-    map_location?: SortOrder
     social_networks?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     is_verified?: SortOrder
     refresh_Token?: SortOrder
     resetPassword_Token?: SortOrder
+    role?: SortOrder
   }
 
   export type VendorMaxOrderByAggregateInput = {
@@ -11083,8 +11336,11 @@ export namespace Prisma {
     business_category?: SortOrder
     license_number?: SortOrder
     description?: SortOrder
-    logo_url?: SortOrder
-    location?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    city?: SortOrder
     email?: SortOrder
     password_hash?: SortOrder
     phone_number?: SortOrder
@@ -11093,6 +11349,7 @@ export namespace Prisma {
     is_verified?: SortOrder
     refresh_Token?: SortOrder
     resetPassword_Token?: SortOrder
+    role?: SortOrder
   }
 
   export type VendorMinOrderByAggregateInput = {
@@ -11102,8 +11359,11 @@ export namespace Prisma {
     business_category?: SortOrder
     license_number?: SortOrder
     description?: SortOrder
-    logo_url?: SortOrder
-    location?: SortOrder
+    country?: SortOrder
+    state?: SortOrder
+    latitude?: SortOrder
+    longitude?: SortOrder
+    city?: SortOrder
     email?: SortOrder
     password_hash?: SortOrder
     phone_number?: SortOrder
@@ -11112,6 +11372,7 @@ export namespace Prisma {
     is_verified?: SortOrder
     refresh_Token?: SortOrder
     resetPassword_Token?: SortOrder
+    role?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -11150,20 +11411,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
     isSet?: boolean
   }
-  export type JsonWithAggregatesFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedJsonFilter<$PrismaModel>
-    _max?: NestedJsonFilter<$PrismaModel>
-  }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> = 
     | PatchUndefined<
         Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
@@ -11200,6 +11447,18 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
   }
 
   export type FloatFilter<$PrismaModel = never> = {
@@ -11243,14 +11502,20 @@ export namespace Prisma {
     vendorId?: SortOrder
     service_name?: SortOrder
     description?: SortOrder
+    min_price?: SortOrder
+    max_price?: SortOrder
     price?: SortOrder
     service_type?: SortOrder
+    rating?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
   export type ServiceAvgOrderByAggregateInput = {
+    min_price?: SortOrder
+    max_price?: SortOrder
     price?: SortOrder
+    rating?: SortOrder
   }
 
   export type ServiceMaxOrderByAggregateInput = {
@@ -11258,8 +11523,11 @@ export namespace Prisma {
     vendorId?: SortOrder
     service_name?: SortOrder
     description?: SortOrder
+    min_price?: SortOrder
+    max_price?: SortOrder
     price?: SortOrder
     service_type?: SortOrder
+    rating?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -11269,14 +11537,37 @@ export namespace Prisma {
     vendorId?: SortOrder
     service_name?: SortOrder
     description?: SortOrder
+    min_price?: SortOrder
+    max_price?: SortOrder
     price?: SortOrder
     service_type?: SortOrder
+    rating?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
   export type ServiceSumOrderByAggregateInput = {
+    min_price?: SortOrder
+    max_price?: SortOrder
     price?: SortOrder
+    rating?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+    isSet?: boolean
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -11326,6 +11617,17 @@ export namespace Prisma {
     is_available?: SortOrder
     created_at?: SortOrder
   }
+  export type JsonFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+  }
 
   export type MediaCountOrderByAggregateInput = {
     id?: SortOrder
@@ -11345,6 +11647,20 @@ export namespace Prisma {
     id?: SortOrder
     serviceId?: SortOrder
     uploaded_at?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type TeamMemberCountOrderByAggregateInput = {
@@ -11446,66 +11762,56 @@ export namespace Prisma {
     created_at?: SortOrder
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type EnumReviewTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReviewType | EnumReviewTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ReviewType[] | ListEnumReviewTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReviewType[] | ListEnumReviewTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumReviewTypeFilter<$PrismaModel> | $Enums.ReviewType
+  }
+
+  export type ServiceNullableRelationFilter = {
+    is?: ServiceWhereInput | null
+    isNot?: ServiceWhereInput | null
   }
 
   export type ReviewCountOrderByAggregateInput = {
     id?: SortOrder
     vendorId?: SortOrder
-    userId?: SortOrder
-    rating?: SortOrder
+    serviceId?: SortOrder
+    reviewerId?: SortOrder
     comment?: SortOrder
+    type?: SortOrder
     created_at?: SortOrder
-  }
-
-  export type ReviewAvgOrderByAggregateInput = {
-    rating?: SortOrder
   }
 
   export type ReviewMaxOrderByAggregateInput = {
     id?: SortOrder
     vendorId?: SortOrder
-    userId?: SortOrder
-    rating?: SortOrder
+    serviceId?: SortOrder
+    reviewerId?: SortOrder
     comment?: SortOrder
+    type?: SortOrder
     created_at?: SortOrder
   }
 
   export type ReviewMinOrderByAggregateInput = {
     id?: SortOrder
     vendorId?: SortOrder
-    userId?: SortOrder
-    rating?: SortOrder
+    serviceId?: SortOrder
+    reviewerId?: SortOrder
     comment?: SortOrder
+    type?: SortOrder
     created_at?: SortOrder
   }
 
-  export type ReviewSumOrderByAggregateInput = {
-    rating?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+  export type EnumReviewTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReviewType | EnumReviewTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ReviewType[] | ListEnumReviewTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReviewType[] | ListEnumReviewTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumReviewTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReviewType
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumReviewTypeFilter<$PrismaModel>
+    _max?: NestedEnumReviewTypeFilter<$PrismaModel>
   }
 
   export type VendorCreateservice_typeInput = {
@@ -11757,6 +12063,13 @@ export namespace Prisma {
     connect?: AvailabilityWhereUniqueInput | AvailabilityWhereUniqueInput[]
   }
 
+  export type ReviewCreateNestedManyWithoutServiceInput = {
+    create?: XOR<ReviewCreateWithoutServiceInput, ReviewUncheckedCreateWithoutServiceInput> | ReviewCreateWithoutServiceInput[] | ReviewUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutServiceInput | ReviewCreateOrConnectWithoutServiceInput[]
+    createMany?: ReviewCreateManyServiceInputEnvelope
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+  }
+
   export type MediaCreateNestedManyWithoutServiceInput = {
     create?: XOR<MediaCreateWithoutServiceInput, MediaUncheckedCreateWithoutServiceInput> | MediaCreateWithoutServiceInput[] | MediaUncheckedCreateWithoutServiceInput[]
     connectOrCreate?: MediaCreateOrConnectWithoutServiceInput | MediaCreateOrConnectWithoutServiceInput[]
@@ -11771,11 +12084,27 @@ export namespace Prisma {
     connect?: AvailabilityWhereUniqueInput | AvailabilityWhereUniqueInput[]
   }
 
+  export type ReviewUncheckedCreateNestedManyWithoutServiceInput = {
+    create?: XOR<ReviewCreateWithoutServiceInput, ReviewUncheckedCreateWithoutServiceInput> | ReviewCreateWithoutServiceInput[] | ReviewUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutServiceInput | ReviewCreateOrConnectWithoutServiceInput[]
+    createMany?: ReviewCreateManyServiceInputEnvelope
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+  }
+
   export type MediaUncheckedCreateNestedManyWithoutServiceInput = {
     create?: XOR<MediaCreateWithoutServiceInput, MediaUncheckedCreateWithoutServiceInput> | MediaCreateWithoutServiceInput[] | MediaUncheckedCreateWithoutServiceInput[]
     connectOrCreate?: MediaCreateOrConnectWithoutServiceInput | MediaCreateOrConnectWithoutServiceInput[]
     createMany?: MediaCreateManyServiceInputEnvelope
     connect?: MediaWhereUniqueInput | MediaWhereUniqueInput[]
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+    unset?: boolean
   }
 
   export type FloatFieldUpdateOperationsInput = {
@@ -11808,6 +12137,20 @@ export namespace Prisma {
     deleteMany?: AvailabilityScalarWhereInput | AvailabilityScalarWhereInput[]
   }
 
+  export type ReviewUpdateManyWithoutServiceNestedInput = {
+    create?: XOR<ReviewCreateWithoutServiceInput, ReviewUncheckedCreateWithoutServiceInput> | ReviewCreateWithoutServiceInput[] | ReviewUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutServiceInput | ReviewCreateOrConnectWithoutServiceInput[]
+    upsert?: ReviewUpsertWithWhereUniqueWithoutServiceInput | ReviewUpsertWithWhereUniqueWithoutServiceInput[]
+    createMany?: ReviewCreateManyServiceInputEnvelope
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    update?: ReviewUpdateWithWhereUniqueWithoutServiceInput | ReviewUpdateWithWhereUniqueWithoutServiceInput[]
+    updateMany?: ReviewUpdateManyWithWhereWithoutServiceInput | ReviewUpdateManyWithWhereWithoutServiceInput[]
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
+  }
+
   export type MediaUpdateManyWithoutServiceNestedInput = {
     create?: XOR<MediaCreateWithoutServiceInput, MediaUncheckedCreateWithoutServiceInput> | MediaCreateWithoutServiceInput[] | MediaUncheckedCreateWithoutServiceInput[]
     connectOrCreate?: MediaCreateOrConnectWithoutServiceInput | MediaCreateOrConnectWithoutServiceInput[]
@@ -11834,6 +12177,20 @@ export namespace Prisma {
     update?: AvailabilityUpdateWithWhereUniqueWithoutServiceInput | AvailabilityUpdateWithWhereUniqueWithoutServiceInput[]
     updateMany?: AvailabilityUpdateManyWithWhereWithoutServiceInput | AvailabilityUpdateManyWithWhereWithoutServiceInput[]
     deleteMany?: AvailabilityScalarWhereInput | AvailabilityScalarWhereInput[]
+  }
+
+  export type ReviewUncheckedUpdateManyWithoutServiceNestedInput = {
+    create?: XOR<ReviewCreateWithoutServiceInput, ReviewUncheckedCreateWithoutServiceInput> | ReviewCreateWithoutServiceInput[] | ReviewUncheckedCreateWithoutServiceInput[]
+    connectOrCreate?: ReviewCreateOrConnectWithoutServiceInput | ReviewCreateOrConnectWithoutServiceInput[]
+    upsert?: ReviewUpsertWithWhereUniqueWithoutServiceInput | ReviewUpsertWithWhereUniqueWithoutServiceInput[]
+    createMany?: ReviewCreateManyServiceInputEnvelope
+    set?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    disconnect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    delete?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+    update?: ReviewUpdateWithWhereUniqueWithoutServiceInput | ReviewUpdateWithWhereUniqueWithoutServiceInput[]
+    updateMany?: ReviewUpdateManyWithWhereWithoutServiceInput | ReviewUpdateManyWithWhereWithoutServiceInput[]
+    deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
   }
 
   export type MediaUncheckedUpdateManyWithoutServiceNestedInput = {
@@ -11864,28 +12221,10 @@ export namespace Prisma {
     update?: XOR<XOR<ServiceUpdateToOneWithWhereWithoutAvailabilitiesInput, ServiceUpdateWithoutAvailabilitiesInput>, ServiceUncheckedUpdateWithoutAvailabilitiesInput>
   }
 
-  export type MediaCreateimage_urlsInput = {
-    set: string[]
-  }
-
-  export type MediaCreatevideo_urlsInput = {
-    set: string[]
-  }
-
   export type ServiceCreateNestedOneWithoutMediaInput = {
     create?: XOR<ServiceCreateWithoutMediaInput, ServiceUncheckedCreateWithoutMediaInput>
     connectOrCreate?: ServiceCreateOrConnectWithoutMediaInput
     connect?: ServiceWhereUniqueInput
-  }
-
-  export type MediaUpdateimage_urlsInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type MediaUpdatevideo_urlsInput = {
-    set?: string[]
-    push?: string | string[]
   }
 
   export type ServiceUpdateOneRequiredWithoutMediaNestedInput = {
@@ -11944,12 +12283,14 @@ export namespace Prisma {
     connect?: VendorWhereUniqueInput
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
+  export type ServiceCreateNestedOneWithoutReviewsInput = {
+    create?: XOR<ServiceCreateWithoutReviewsInput, ServiceUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: ServiceCreateOrConnectWithoutReviewsInput
+    connect?: ServiceWhereUniqueInput
+  }
+
+  export type EnumReviewTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ReviewType
   }
 
   export type VendorUpdateOneRequiredWithoutReviewsNestedInput = {
@@ -11958,6 +12299,16 @@ export namespace Prisma {
     upsert?: VendorUpsertWithoutReviewsInput
     connect?: VendorWhereUniqueInput
     update?: XOR<XOR<VendorUpdateToOneWithWhereWithoutReviewsInput, VendorUpdateWithoutReviewsInput>, VendorUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type ServiceUpdateOneWithoutReviewsNestedInput = {
+    create?: XOR<ServiceCreateWithoutReviewsInput, ServiceUncheckedCreateWithoutReviewsInput>
+    connectOrCreate?: ServiceCreateOrConnectWithoutReviewsInput
+    upsert?: ServiceUpsertWithoutReviewsInput
+    disconnect?: boolean
+    delete?: ServiceWhereInput | boolean
+    connect?: ServiceWhereUniqueInput
+    update?: XOR<XOR<ServiceUpdateToOneWithWhereWithoutReviewsInput, ServiceUpdateWithoutReviewsInput>, ServiceUncheckedUpdateWithoutReviewsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -12062,17 +12413,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
     isSet?: boolean
   }
-  export type NestedJsonFilter<$PrismaModel = never> = 
-    | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type NestedJsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-  }
   export type NestedJsonNullableFilter<$PrismaModel = never> = 
     | PatchUndefined<
         Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -12108,6 +12448,18 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    isSet?: boolean
+  }
+
   export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -12117,6 +12469,23 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+    isSet?: boolean
   }
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -12134,32 +12503,48 @@ export namespace Prisma {
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
   }
+  export type NestedJsonFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+  }
+
+  export type NestedEnumReviewTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReviewType | EnumReviewTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ReviewType[] | ListEnumReviewTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReviewType[] | ListEnumReviewTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumReviewTypeFilter<$PrismaModel> | $Enums.ReviewType
+  }
+
+  export type NestedEnumReviewTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ReviewType | EnumReviewTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ReviewType[] | ListEnumReviewTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ReviewType[] | ListEnumReviewTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumReviewTypeWithAggregatesFilter<$PrismaModel> | $Enums.ReviewType
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumReviewTypeFilter<$PrismaModel>
+    _max?: NestedEnumReviewTypeFilter<$PrismaModel>
   }
 
   export type ServiceCreateWithoutVendorInput = {
     id?: string
     service_name: string
     description: string
-    price: number
+    min_price?: number | null
+    max_price?: number | null
+    price?: number | null
     service_type: string
+    rating?: number
     created_at?: Date | string
     updated_at?: Date | string
     availabilities?: AvailabilityCreateNestedManyWithoutServiceInput
+    reviews?: ReviewCreateNestedManyWithoutServiceInput
     media?: MediaCreateNestedManyWithoutServiceInput
   }
 
@@ -12167,11 +12552,15 @@ export namespace Prisma {
     id?: string
     service_name: string
     description: string
-    price: number
+    min_price?: number | null
+    max_price?: number | null
+    price?: number | null
     service_type: string
+    rating?: number
     created_at?: Date | string
     updated_at?: Date | string
     availabilities?: AvailabilityUncheckedCreateNestedManyWithoutServiceInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutServiceInput
     media?: MediaUncheckedCreateNestedManyWithoutServiceInput
   }
 
@@ -12269,17 +12658,19 @@ export namespace Prisma {
 
   export type ReviewCreateWithoutVendorInput = {
     id?: string
-    userId: string
-    rating?: number
+    reviewerId: string
     comment?: string | null
+    type: $Enums.ReviewType
     created_at?: Date | string
+    service?: ServiceCreateNestedOneWithoutReviewsInput
   }
 
   export type ReviewUncheckedCreateWithoutVendorInput = {
     id?: string
-    userId: string
-    rating?: number
+    serviceId?: string | null
+    reviewerId: string
     comment?: string | null
+    type: $Enums.ReviewType
     created_at?: Date | string
   }
 
@@ -12316,8 +12707,11 @@ export namespace Prisma {
     vendorId?: StringFilter<"Service"> | string
     service_name?: StringFilter<"Service"> | string
     description?: StringFilter<"Service"> | string
-    price?: FloatFilter<"Service"> | number
+    min_price?: FloatNullableFilter<"Service"> | number | null
+    max_price?: FloatNullableFilter<"Service"> | number | null
+    price?: FloatNullableFilter<"Service"> | number | null
     service_type?: StringFilter<"Service"> | string
+    rating?: FloatFilter<"Service"> | number
     created_at?: DateTimeFilter<"Service"> | Date | string
     updated_at?: DateTimeFilter<"Service"> | Date | string
   }
@@ -12432,9 +12826,10 @@ export namespace Prisma {
     NOT?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
     id?: StringFilter<"Review"> | string
     vendorId?: StringFilter<"Review"> | string
-    userId?: StringFilter<"Review"> | string
-    rating?: IntFilter<"Review"> | number
+    serviceId?: StringNullableFilter<"Review"> | string | null
+    reviewerId?: StringFilter<"Review"> | string
     comment?: StringNullableFilter<"Review"> | string | null
+    type?: EnumReviewTypeFilter<"Review"> | $Enums.ReviewType
     created_at?: DateTimeFilter<"Review"> | Date | string
   }
 
@@ -12446,18 +12841,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
     promotions?: PromotionCreateNestedManyWithoutVendorInput
     team_members?: TeamMemberCreateNestedManyWithoutVendorInput
     faqs?: FAQCreateNestedManyWithoutVendorInput
@@ -12472,18 +12871,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
     promotions?: PromotionUncheckedCreateNestedManyWithoutVendorInput
     team_members?: TeamMemberUncheckedCreateNestedManyWithoutVendorInput
     faqs?: FAQUncheckedCreateNestedManyWithoutVendorInput
@@ -12520,17 +12923,44 @@ export namespace Prisma {
     data: AvailabilityCreateManyServiceInput | AvailabilityCreateManyServiceInput[]
   }
 
+  export type ReviewCreateWithoutServiceInput = {
+    id?: string
+    reviewerId: string
+    comment?: string | null
+    type: $Enums.ReviewType
+    created_at?: Date | string
+    vendor: VendorCreateNestedOneWithoutReviewsInput
+  }
+
+  export type ReviewUncheckedCreateWithoutServiceInput = {
+    id?: string
+    vendorId: string
+    reviewerId: string
+    comment?: string | null
+    type: $Enums.ReviewType
+    created_at?: Date | string
+  }
+
+  export type ReviewCreateOrConnectWithoutServiceInput = {
+    where: ReviewWhereUniqueInput
+    create: XOR<ReviewCreateWithoutServiceInput, ReviewUncheckedCreateWithoutServiceInput>
+  }
+
+  export type ReviewCreateManyServiceInputEnvelope = {
+    data: ReviewCreateManyServiceInput | ReviewCreateManyServiceInput[]
+  }
+
   export type MediaCreateWithoutServiceInput = {
     id?: string
-    image_urls?: MediaCreateimage_urlsInput | string[]
-    video_urls?: MediaCreatevideo_urlsInput | string[]
+    image_urls: InputJsonValue
+    video_urls: InputJsonValue
     uploaded_at?: Date | string
   }
 
   export type MediaUncheckedCreateWithoutServiceInput = {
     id?: string
-    image_urls?: MediaCreateimage_urlsInput | string[]
-    video_urls?: MediaCreatevideo_urlsInput | string[]
+    image_urls: InputJsonValue
+    video_urls: InputJsonValue
     uploaded_at?: Date | string
   }
 
@@ -12561,18 +12991,22 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     promotions?: PromotionUpdateManyWithoutVendorNestedInput
     team_members?: TeamMemberUpdateManyWithoutVendorNestedInput
     faqs?: FAQUpdateManyWithoutVendorNestedInput
@@ -12586,18 +13020,22 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     promotions?: PromotionUncheckedUpdateManyWithoutVendorNestedInput
     team_members?: TeamMemberUncheckedUpdateManyWithoutVendorNestedInput
     faqs?: FAQUncheckedUpdateManyWithoutVendorNestedInput
@@ -12632,6 +13070,22 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Availability"> | Date | string
   }
 
+  export type ReviewUpsertWithWhereUniqueWithoutServiceInput = {
+    where: ReviewWhereUniqueInput
+    update: XOR<ReviewUpdateWithoutServiceInput, ReviewUncheckedUpdateWithoutServiceInput>
+    create: XOR<ReviewCreateWithoutServiceInput, ReviewUncheckedCreateWithoutServiceInput>
+  }
+
+  export type ReviewUpdateWithWhereUniqueWithoutServiceInput = {
+    where: ReviewWhereUniqueInput
+    data: XOR<ReviewUpdateWithoutServiceInput, ReviewUncheckedUpdateWithoutServiceInput>
+  }
+
+  export type ReviewUpdateManyWithWhereWithoutServiceInput = {
+    where: ReviewScalarWhereInput
+    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyWithoutServiceInput>
+  }
+
   export type MediaUpsertWithWhereUniqueWithoutServiceInput = {
     where: MediaWhereUniqueInput
     update: XOR<MediaUpdateWithoutServiceInput, MediaUncheckedUpdateWithoutServiceInput>
@@ -12654,8 +13108,8 @@ export namespace Prisma {
     NOT?: MediaScalarWhereInput | MediaScalarWhereInput[]
     id?: StringFilter<"Media"> | string
     serviceId?: StringFilter<"Media"> | string
-    image_urls?: StringNullableListFilter<"Media">
-    video_urls?: StringNullableListFilter<"Media">
+    image_urls?: JsonFilter<"Media">
+    video_urls?: JsonFilter<"Media">
     uploaded_at?: DateTimeFilter<"Media"> | Date | string
   }
 
@@ -12663,11 +13117,15 @@ export namespace Prisma {
     id?: string
     service_name: string
     description: string
-    price: number
+    min_price?: number | null
+    max_price?: number | null
+    price?: number | null
     service_type: string
+    rating?: number
     created_at?: Date | string
     updated_at?: Date | string
     vendor: VendorCreateNestedOneWithoutServicesInput
+    reviews?: ReviewCreateNestedManyWithoutServiceInput
     media?: MediaCreateNestedManyWithoutServiceInput
   }
 
@@ -12676,10 +13134,14 @@ export namespace Prisma {
     vendorId: string
     service_name: string
     description: string
-    price: number
+    min_price?: number | null
+    max_price?: number | null
+    price?: number | null
     service_type: string
+    rating?: number
     created_at?: Date | string
     updated_at?: Date | string
+    reviews?: ReviewUncheckedCreateNestedManyWithoutServiceInput
     media?: MediaUncheckedCreateNestedManyWithoutServiceInput
   }
 
@@ -12702,11 +13164,15 @@ export namespace Prisma {
   export type ServiceUpdateWithoutAvailabilitiesInput = {
     service_name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     vendor?: VendorUpdateOneRequiredWithoutServicesNestedInput
+    reviews?: ReviewUpdateManyWithoutServiceNestedInput
     media?: MediaUpdateManyWithoutServiceNestedInput
   }
 
@@ -12714,10 +13180,14 @@ export namespace Prisma {
     vendorId?: StringFieldUpdateOperationsInput | string
     service_name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    reviews?: ReviewUncheckedUpdateManyWithoutServiceNestedInput
     media?: MediaUncheckedUpdateManyWithoutServiceNestedInput
   }
 
@@ -12725,12 +13195,16 @@ export namespace Prisma {
     id?: string
     service_name: string
     description: string
-    price: number
+    min_price?: number | null
+    max_price?: number | null
+    price?: number | null
     service_type: string
+    rating?: number
     created_at?: Date | string
     updated_at?: Date | string
     vendor: VendorCreateNestedOneWithoutServicesInput
     availabilities?: AvailabilityCreateNestedManyWithoutServiceInput
+    reviews?: ReviewCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceUncheckedCreateWithoutMediaInput = {
@@ -12738,11 +13212,15 @@ export namespace Prisma {
     vendorId: string
     service_name: string
     description: string
-    price: number
+    min_price?: number | null
+    max_price?: number | null
+    price?: number | null
     service_type: string
+    rating?: number
     created_at?: Date | string
     updated_at?: Date | string
     availabilities?: AvailabilityUncheckedCreateNestedManyWithoutServiceInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutServiceInput
   }
 
   export type ServiceCreateOrConnectWithoutMediaInput = {
@@ -12764,23 +13242,31 @@ export namespace Prisma {
   export type ServiceUpdateWithoutMediaInput = {
     service_name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     vendor?: VendorUpdateOneRequiredWithoutServicesNestedInput
     availabilities?: AvailabilityUpdateManyWithoutServiceNestedInput
+    reviews?: ReviewUpdateManyWithoutServiceNestedInput
   }
 
   export type ServiceUncheckedUpdateWithoutMediaInput = {
     vendorId?: StringFieldUpdateOperationsInput | string
     service_name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     availabilities?: AvailabilityUncheckedUpdateManyWithoutServiceNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutServiceNestedInput
   }
 
   export type VendorCreateWithoutTeam_membersInput = {
@@ -12791,18 +13277,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
     services?: ServiceCreateNestedManyWithoutVendorInput
     promotions?: PromotionCreateNestedManyWithoutVendorInput
     faqs?: FAQCreateNestedManyWithoutVendorInput
@@ -12817,18 +13307,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
     services?: ServiceUncheckedCreateNestedManyWithoutVendorInput
     promotions?: PromotionUncheckedCreateNestedManyWithoutVendorInput
     faqs?: FAQUncheckedCreateNestedManyWithoutVendorInput
@@ -12858,18 +13352,22 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     services?: ServiceUpdateManyWithoutVendorNestedInput
     promotions?: PromotionUpdateManyWithoutVendorNestedInput
     faqs?: FAQUpdateManyWithoutVendorNestedInput
@@ -12883,18 +13381,22 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     services?: ServiceUncheckedUpdateManyWithoutVendorNestedInput
     promotions?: PromotionUncheckedUpdateManyWithoutVendorNestedInput
     faqs?: FAQUncheckedUpdateManyWithoutVendorNestedInput
@@ -12909,18 +13411,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
     services?: ServiceCreateNestedManyWithoutVendorInput
     team_members?: TeamMemberCreateNestedManyWithoutVendorInput
     faqs?: FAQCreateNestedManyWithoutVendorInput
@@ -12935,18 +13441,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
     services?: ServiceUncheckedCreateNestedManyWithoutVendorInput
     team_members?: TeamMemberUncheckedCreateNestedManyWithoutVendorInput
     faqs?: FAQUncheckedCreateNestedManyWithoutVendorInput
@@ -12976,18 +13486,22 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     services?: ServiceUpdateManyWithoutVendorNestedInput
     team_members?: TeamMemberUpdateManyWithoutVendorNestedInput
     faqs?: FAQUpdateManyWithoutVendorNestedInput
@@ -13001,18 +13515,22 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     services?: ServiceUncheckedUpdateManyWithoutVendorNestedInput
     team_members?: TeamMemberUncheckedUpdateManyWithoutVendorNestedInput
     faqs?: FAQUncheckedUpdateManyWithoutVendorNestedInput
@@ -13027,18 +13545,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
     services?: ServiceCreateNestedManyWithoutVendorInput
     promotions?: PromotionCreateNestedManyWithoutVendorInput
     team_members?: TeamMemberCreateNestedManyWithoutVendorInput
@@ -13053,18 +13575,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
     services?: ServiceUncheckedCreateNestedManyWithoutVendorInput
     promotions?: PromotionUncheckedCreateNestedManyWithoutVendorInput
     team_members?: TeamMemberUncheckedCreateNestedManyWithoutVendorInput
@@ -13094,18 +13620,22 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     services?: ServiceUpdateManyWithoutVendorNestedInput
     promotions?: PromotionUpdateManyWithoutVendorNestedInput
     team_members?: TeamMemberUpdateManyWithoutVendorNestedInput
@@ -13119,18 +13649,22 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     services?: ServiceUncheckedUpdateManyWithoutVendorNestedInput
     promotions?: PromotionUncheckedUpdateManyWithoutVendorNestedInput
     team_members?: TeamMemberUncheckedUpdateManyWithoutVendorNestedInput
@@ -13145,18 +13679,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
     services?: ServiceCreateNestedManyWithoutVendorInput
     promotions?: PromotionCreateNestedManyWithoutVendorInput
     team_members?: TeamMemberCreateNestedManyWithoutVendorInput
@@ -13171,18 +13709,22 @@ export namespace Prisma {
     license_number?: string | null
     service_type?: VendorCreateservice_typeInput | string[]
     description: string
-    logo_url?: string | null
-    location?: string | null
+    logo_url?: InputJsonValue | null
+    country?: string | null
+    state?: string | null
+    latitude?: string | null
+    longitude?: string | null
+    city?: string | null
     email: string
     password_hash: string
     phone_number: string
-    map_location: InputJsonValue
     social_networks?: InputJsonValue | null
     created_at?: Date | string
     updated_at?: Date | string
     is_verified?: boolean
     refresh_Token?: string | null
     resetPassword_Token?: string | null
+    role?: string
     services?: ServiceUncheckedCreateNestedManyWithoutVendorInput
     promotions?: PromotionUncheckedCreateNestedManyWithoutVendorInput
     team_members?: TeamMemberUncheckedCreateNestedManyWithoutVendorInput
@@ -13192,6 +13734,43 @@ export namespace Prisma {
   export type VendorCreateOrConnectWithoutReviewsInput = {
     where: VendorWhereUniqueInput
     create: XOR<VendorCreateWithoutReviewsInput, VendorUncheckedCreateWithoutReviewsInput>
+  }
+
+  export type ServiceCreateWithoutReviewsInput = {
+    id?: string
+    service_name: string
+    description: string
+    min_price?: number | null
+    max_price?: number | null
+    price?: number | null
+    service_type: string
+    rating?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    vendor: VendorCreateNestedOneWithoutServicesInput
+    availabilities?: AvailabilityCreateNestedManyWithoutServiceInput
+    media?: MediaCreateNestedManyWithoutServiceInput
+  }
+
+  export type ServiceUncheckedCreateWithoutReviewsInput = {
+    id?: string
+    vendorId: string
+    service_name: string
+    description: string
+    min_price?: number | null
+    max_price?: number | null
+    price?: number | null
+    service_type: string
+    rating?: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    availabilities?: AvailabilityUncheckedCreateNestedManyWithoutServiceInput
+    media?: MediaUncheckedCreateNestedManyWithoutServiceInput
+  }
+
+  export type ServiceCreateOrConnectWithoutReviewsInput = {
+    where: ServiceWhereUniqueInput
+    create: XOR<ServiceCreateWithoutReviewsInput, ServiceUncheckedCreateWithoutReviewsInput>
   }
 
   export type VendorUpsertWithoutReviewsInput = {
@@ -13212,18 +13791,22 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     services?: ServiceUpdateManyWithoutVendorNestedInput
     promotions?: PromotionUpdateManyWithoutVendorNestedInput
     team_members?: TeamMemberUpdateManyWithoutVendorNestedInput
@@ -13237,30 +13820,78 @@ export namespace Prisma {
     license_number?: NullableStringFieldUpdateOperationsInput | string | null
     service_type?: VendorUpdateservice_typeInput | string[]
     description?: StringFieldUpdateOperationsInput | string
-    logo_url?: NullableStringFieldUpdateOperationsInput | string | null
-    location?: NullableStringFieldUpdateOperationsInput | string | null
+    logo_url?: InputJsonValue | InputJsonValue | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
+    latitude?: NullableStringFieldUpdateOperationsInput | string | null
+    longitude?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
     password_hash?: StringFieldUpdateOperationsInput | string
     phone_number?: StringFieldUpdateOperationsInput | string
-    map_location?: InputJsonValue | InputJsonValue
     social_networks?: InputJsonValue | InputJsonValue | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     is_verified?: BoolFieldUpdateOperationsInput | boolean
     refresh_Token?: NullableStringFieldUpdateOperationsInput | string | null
     resetPassword_Token?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
     services?: ServiceUncheckedUpdateManyWithoutVendorNestedInput
     promotions?: PromotionUncheckedUpdateManyWithoutVendorNestedInput
     team_members?: TeamMemberUncheckedUpdateManyWithoutVendorNestedInput
     faqs?: FAQUncheckedUpdateManyWithoutVendorNestedInput
   }
 
+  export type ServiceUpsertWithoutReviewsInput = {
+    update: XOR<ServiceUpdateWithoutReviewsInput, ServiceUncheckedUpdateWithoutReviewsInput>
+    create: XOR<ServiceCreateWithoutReviewsInput, ServiceUncheckedCreateWithoutReviewsInput>
+    where?: ServiceWhereInput
+  }
+
+  export type ServiceUpdateToOneWithWhereWithoutReviewsInput = {
+    where?: ServiceWhereInput
+    data: XOR<ServiceUpdateWithoutReviewsInput, ServiceUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type ServiceUpdateWithoutReviewsInput = {
+    service_name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    vendor?: VendorUpdateOneRequiredWithoutServicesNestedInput
+    availabilities?: AvailabilityUpdateManyWithoutServiceNestedInput
+    media?: MediaUpdateManyWithoutServiceNestedInput
+  }
+
+  export type ServiceUncheckedUpdateWithoutReviewsInput = {
+    vendorId?: StringFieldUpdateOperationsInput | string
+    service_name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    availabilities?: AvailabilityUncheckedUpdateManyWithoutServiceNestedInput
+    media?: MediaUncheckedUpdateManyWithoutServiceNestedInput
+  }
+
   export type ServiceCreateManyVendorInput = {
     id?: string
     service_name: string
     description: string
-    price: number
+    min_price?: number | null
+    max_price?: number | null
+    price?: number | null
     service_type: string
+    rating?: number
     created_at?: Date | string
     updated_at?: Date | string
   }
@@ -13295,39 +13926,51 @@ export namespace Prisma {
 
   export type ReviewCreateManyVendorInput = {
     id?: string
-    userId: string
-    rating?: number
+    serviceId?: string | null
+    reviewerId: string
     comment?: string | null
+    type: $Enums.ReviewType
     created_at?: Date | string
   }
 
   export type ServiceUpdateWithoutVendorInput = {
     service_name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     availabilities?: AvailabilityUpdateManyWithoutServiceNestedInput
+    reviews?: ReviewUpdateManyWithoutServiceNestedInput
     media?: MediaUpdateManyWithoutServiceNestedInput
   }
 
   export type ServiceUncheckedUpdateWithoutVendorInput = {
     service_name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     availabilities?: AvailabilityUncheckedUpdateManyWithoutServiceNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutServiceNestedInput
     media?: MediaUncheckedUpdateManyWithoutServiceNestedInput
   }
 
   export type ServiceUncheckedUpdateManyWithoutVendorInput = {
     service_name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    min_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    max_price?: NullableFloatFieldUpdateOperationsInput | number | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
     service_type?: StringFieldUpdateOperationsInput | string
+    rating?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13408,23 +14051,26 @@ export namespace Prisma {
   }
 
   export type ReviewUpdateWithoutVendorInput = {
-    userId?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
+    reviewerId?: StringFieldUpdateOperationsInput | string
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    service?: ServiceUpdateOneWithoutReviewsNestedInput
   }
 
   export type ReviewUncheckedUpdateWithoutVendorInput = {
-    userId?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
+    serviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: StringFieldUpdateOperationsInput | string
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReviewUncheckedUpdateManyWithoutVendorInput = {
-    userId?: StringFieldUpdateOperationsInput | string
-    rating?: IntFieldUpdateOperationsInput | number
+    serviceId?: NullableStringFieldUpdateOperationsInput | string | null
+    reviewerId?: StringFieldUpdateOperationsInput | string
     comment?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -13436,10 +14082,19 @@ export namespace Prisma {
     created_at?: Date | string
   }
 
+  export type ReviewCreateManyServiceInput = {
+    id?: string
+    vendorId: string
+    reviewerId: string
+    comment?: string | null
+    type: $Enums.ReviewType
+    created_at?: Date | string
+  }
+
   export type MediaCreateManyServiceInput = {
     id?: string
-    image_urls?: MediaCreateimage_urlsInput | string[]
-    video_urls?: MediaCreatevideo_urlsInput | string[]
+    image_urls: InputJsonValue
+    video_urls: InputJsonValue
     uploaded_at?: Date | string
   }
 
@@ -13464,21 +14119,45 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ReviewUpdateWithoutServiceInput = {
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    vendor?: VendorUpdateOneRequiredWithoutReviewsNestedInput
+  }
+
+  export type ReviewUncheckedUpdateWithoutServiceInput = {
+    vendorId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ReviewUncheckedUpdateManyWithoutServiceInput = {
+    vendorId?: StringFieldUpdateOperationsInput | string
+    reviewerId?: StringFieldUpdateOperationsInput | string
+    comment?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumReviewTypeFieldUpdateOperationsInput | $Enums.ReviewType
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type MediaUpdateWithoutServiceInput = {
-    image_urls?: MediaUpdateimage_urlsInput | string[]
-    video_urls?: MediaUpdatevideo_urlsInput | string[]
+    image_urls?: InputJsonValue | InputJsonValue
+    video_urls?: InputJsonValue | InputJsonValue
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MediaUncheckedUpdateWithoutServiceInput = {
-    image_urls?: MediaUpdateimage_urlsInput | string[]
-    video_urls?: MediaUpdatevideo_urlsInput | string[]
+    image_urls?: InputJsonValue | InputJsonValue
+    video_urls?: InputJsonValue | InputJsonValue
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MediaUncheckedUpdateManyWithoutServiceInput = {
-    image_urls?: MediaUpdateimage_urlsInput | string[]
-    video_urls?: MediaUpdatevideo_urlsInput | string[]
+    image_urls?: InputJsonValue | InputJsonValue
+    video_urls?: InputJsonValue | InputJsonValue
     uploaded_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

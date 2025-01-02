@@ -123,13 +123,13 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 });
 
 exports.Prisma.UserScalarFieldEnum = {
-  user_id: 'user_id',
+  id: 'id',
   email: 'email',
   refresh_Token: 'refresh_Token',
   password_hash: 'password_hash',
   resetPassword_Token: 'resetPassword_Token',
-  first_name: 'first_name',
-  last_name: 'last_name',
+  profile_photo: 'profile_photo',
+  user_name: 'user_name',
   phone_number: 'phone_number',
   role: 'role',
   wedding_date: 'wedding_date',
@@ -140,13 +140,24 @@ exports.Prisma.UserScalarFieldEnum = {
 };
 
 exports.Prisma.BookingScalarFieldEnum = {
+  id: 'id',
   booking_id: 'booking_id',
-  user_id: 'user_id',
-  vendor_id: 'vendor_id',
   service_id: 'service_id',
+  vendor_id: 'vendor_id',
   booking_date: 'booking_date',
   status: 'status',
-  created_at: 'created_at'
+  negotiated_price: 'negotiated_price',
+  is_negotiable: 'is_negotiable',
+  totalAmount: 'totalAmount',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.CartScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  serviceId: 'serviceId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.PaymentScalarFieldEnum = {
@@ -162,7 +173,7 @@ exports.Prisma.PaymentScalarFieldEnum = {
 exports.Prisma.ReviewScalarFieldEnum = {
   review_id: 'review_id',
   vendor_id: 'vendor_id',
-  user_id: 'user_id',
+  id: 'id',
   rating: 'rating',
   review_text: 'review_text',
   created_at: 'created_at'
@@ -202,6 +213,7 @@ exports.Role = exports.$Enums.Role = {
 exports.Prisma.ModelName = {
   User: 'User',
   Booking: 'Booking',
+  Cart: 'Cart',
   Payment: 'Payment',
   Review: 'Review',
   EventSchedule: 'EventSchedule'

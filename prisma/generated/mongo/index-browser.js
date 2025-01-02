@@ -124,17 +124,21 @@ exports.Prisma.VendorScalarFieldEnum = {
   service_type: 'service_type',
   description: 'description',
   logo_url: 'logo_url',
-  location: 'location',
+  country: 'country',
+  state: 'state',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  city: 'city',
   email: 'email',
   password_hash: 'password_hash',
   phone_number: 'phone_number',
-  map_location: 'map_location',
   social_networks: 'social_networks',
   created_at: 'created_at',
   updated_at: 'updated_at',
   is_verified: 'is_verified',
   refresh_Token: 'refresh_Token',
-  resetPassword_Token: 'resetPassword_Token'
+  resetPassword_Token: 'resetPassword_Token',
+  role: 'role'
 };
 
 exports.Prisma.ServiceScalarFieldEnum = {
@@ -142,8 +146,11 @@ exports.Prisma.ServiceScalarFieldEnum = {
   vendorId: 'vendorId',
   service_name: 'service_name',
   description: 'description',
+  min_price: 'min_price',
+  max_price: 'max_price',
   price: 'price',
   service_type: 'service_type',
+  rating: 'rating',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -199,9 +206,10 @@ exports.Prisma.FAQScalarFieldEnum = {
 exports.Prisma.ReviewScalarFieldEnum = {
   id: 'id',
   vendorId: 'vendorId',
-  userId: 'userId',
-  rating: 'rating',
+  serviceId: 'serviceId',
+  reviewerId: 'reviewerId',
   comment: 'comment',
+  type: 'type',
   created_at: 'created_at'
 };
 
@@ -214,7 +222,10 @@ exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
-
+exports.ReviewType = exports.$Enums.ReviewType = {
+  VENDOR: 'VENDOR',
+  SERVICE: 'SERVICE'
+};
 
 exports.Prisma.ModelName = {
   Vendor: 'Vendor',
