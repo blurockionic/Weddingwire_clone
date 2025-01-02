@@ -14,6 +14,8 @@ const jwtAuthentication = (req, res, next) => {
       throw new CustomError("Access token is missing or invalid", 403);
     }
 
+    
+
     // Verify and decode the token
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 

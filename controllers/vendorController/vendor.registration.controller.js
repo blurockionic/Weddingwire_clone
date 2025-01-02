@@ -35,10 +35,14 @@ const vendorRegistration = async (req, res, next) => {
 
         await sendVerificationEmail(existingVendor.email, emailContent);
 
+
         return res.status(200).json({
           message:
             "Email already exists but not verified. Verification email resent.",
         });
+
+  
+    
       }
     }
 

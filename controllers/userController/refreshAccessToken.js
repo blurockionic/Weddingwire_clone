@@ -28,7 +28,10 @@ export const refreshAccessToken = async (req, res, next) => {
 
 
     const user = await prisma.User.findUnique({
+
       where: { id : decodedToken.id }, 
+
+
     });
 
     if (!user) {

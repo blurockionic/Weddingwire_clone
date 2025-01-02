@@ -14,6 +14,7 @@ const  deleteVendorAccount = async (req, res, next) => {
       
   
       // Find the user in the database
+
       const deletedVendor = await prisma.Vendor.delete({
         where: { id },
       });
@@ -22,14 +23,20 @@ const  deleteVendorAccount = async (req, res, next) => {
         throw new CustomError("Vendor not found or already deleted.", 404);
       }
     
+
       // Step 4: Return a success response
       res.status(200).json({
         message: "Vendor account deleted successfully.",
       });
     } catch (error) {
+
    
 
       next(error); 
+
+      
+    
+
     }
   };
   

@@ -44,7 +44,7 @@ class GenerateToken {
       throw new CustomError('Failed to generate refresh token.', 500);
     }
   }
-  
+
   static generatePasswordResetToken(user) {
     try {
       const { id } = user;
@@ -61,7 +61,7 @@ class GenerateToken {
       throw new CustomError('Failed to generate reset token.', 500);
     }
   }
-  
+
 
 // fuction for generate email verification token
   static generateEmailVerificationToken(user) {
